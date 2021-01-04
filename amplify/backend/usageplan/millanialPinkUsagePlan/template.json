@@ -1,0 +1,70 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "api key for rest api",
+    "Parameters": {
+        "env": {
+            "Type": "String"
+        },
+        "apiapif8a27563ApiId": {
+            "Type": "String"
+        },
+        "apikeymillanialPinkApiKeyApiKeyId": {
+            "Type":"String"
+        }
+    },
+    "Resources": {
+        "UsagePlan": {
+            "Type": "AWS::ApiGateway::UsagePlan",
+            "Properties": {
+                "ApiStages": [
+                    {
+                        "ApiId": {
+                            "Ref": "apiapif8a27563ApiId"
+                        },
+                        "Stage": {
+                            "Ref": "env"
+                        }
+                    }
+                ],
+                "Description": "Customer ABC's usage plan",
+                "Quota": {
+                    "Limit": 5000,
+                    "Period": "MONTH"
+                },
+                "Throttle": {
+                    "BurstLimit": 200,
+                    "RateLimit": 100
+                },
+                "UsagePlanName": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "millanialsPink-UsagePlan-",
+                            {
+                                "Ref": "env"
+                            }
+                        ]
+                    ]
+                }
+            }
+        },
+        "usagePlanKey": {
+            "Type": "AWS::ApiGateway::UsagePlanKey",
+            "Properties": {
+                "KeyId": {
+                    "Ref": "apikeymillanialPinkApiKeyApiKeyId"
+                },
+                "KeyType": "API_KEY",
+                "UsagePlanId": {
+                    "Ref": "UsagePlan"
+                }
+            }
+        }
+    },
+    "Outputs": {
+        "PlanId": {
+            "Description": "Usage Plan Id",
+            "Value": {"Ref": "UsagePlan"}
+        }
+    }
+}

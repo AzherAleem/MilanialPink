@@ -1,0 +1,35 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "api key for rest api",
+    "Parameters": {
+        "env": {
+            "Type": "String"
+        }
+    },
+    "Resources": {
+        "ApiKey": {
+            "Type": "AWS::ApiGateway::ApiKey",
+            "Properties": {
+                "Name": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "millanialsPink-Apikey-",
+                            {
+                                "Ref": "env"
+                            }
+                        ]
+                    ]
+                },
+                "Description": "CloudFormation API Key V1",
+                "Enabled": "true"
+            }
+        }
+    },
+    "Outputs": {
+        "ApiKeyId": {
+            "Description": "API key Id",
+            "Value": {"Ref": "ApiKey"}
+        }
+    }
+}

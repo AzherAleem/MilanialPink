@@ -1,0 +1,77 @@
+{
+  "api": {
+    "MillanialPink": {
+      "service": "AppSync",
+      "providerPlugin": "awscloudformation",
+      "output": {
+        "authConfig": {
+          "defaultAuthentication": {
+            "authenticationType": "API_KEY",
+            "apiKeyConfig": {
+              "apiKeyExpirationDays": 7,
+              "description": ""
+            }
+          }
+        }
+      }
+    },
+    "apif8a27563": {
+      "service": "API Gateway",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "millanialpink12324f94",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        }
+      ]
+    }
+  },
+  "function": {
+    "millanialpink12324f94": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "api",
+          "resourceName": "MillanialPink",
+          "attributes": [
+            "GraphQLAPIIdOutput"
+          ]
+        }
+      ]
+    }
+  },
+  "apikey": {
+    "millanialPinkApiKey": {
+      "providerPlugin": "awscloudformation",
+      "service": "ApiKey"
+    }
+  },
+  "usageplan": {
+    "millanialPinkUsagePlan": {
+      "providerPlugin": "awscloudformation",
+      "service": "UsagePlan",
+      "dependsOn": [
+        {
+          "category": "api",
+          "resourceName": "apif8a27563",
+          "attributes": [
+            "ApiId"
+          ]
+        },
+        {
+          "category": "apikey",
+          "resourceName": "millanialPinkApiKey",
+          "attributes": [
+            "ApiKeyId"
+          ]
+        }
+      ]
+    }
+  }
+}

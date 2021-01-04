@@ -1,0 +1,35 @@
+{
+    "paths": [
+        {
+            "name": "/wallpaper",
+            "lambdaFunction": "millanialpink12324f94",
+            "privacy": {
+                "open": true
+            }
+        }
+    ],
+    "resourceName": "apif8a27563",
+    "apiName": "apif8a27563",
+    "functionArns": [
+        {
+            "lambdaFunction": "millanialpink12324f94"
+        }
+    ],
+    "privacy": {
+        "auth": 0,
+        "unauth": 0,
+        "authRoleName": "amplify-millanialpink-dev-182859-authRole",
+        "unAuthRoleName": "amplify-millanialpink-dev-182859-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "millanialpink12324f94",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ],
+    "uuid": "2ac2d2e1"
+}

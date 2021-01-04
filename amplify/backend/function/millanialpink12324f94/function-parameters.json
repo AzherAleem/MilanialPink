@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "storage": {
+      "Wallpaper:@model(appsync)": [
+        "create",
+        "read"
+      ],
+      "WallList:@model(appsync)": [
+        "create",
+        "read"
+      ]
+    }
+  },
+  "lambdaLayers": []
+}

@@ -1,0 +1,17 @@
+type Wallpaper @model @auth(rules: [{allow: public}]) @key(name: "byWallList", fields: ["walllistID"]) {
+  wallpaperID: String
+  isOrignal: String!
+  cost: String!
+  imageUrlIphone: AWSURL!
+  imageUrlIpad: AWSURL!
+  walllistID: ID!
+  id: ID!
+}
+
+type WallList @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  title: String
+  order: Int
+  Wallpapers: [Wallpaper!] @connection(keyName: "byWallList", fields: ["id"])
+}
+ 
