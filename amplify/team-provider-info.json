@@ -1,4 +1,22 @@
 {
+  "prod": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-millanialpink-prod-164450-authRole",
+      "UnauthRoleArn": "arn:aws:iam::952368058941:role/amplify-millanialpink-prod-164450-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::952368058941:role/amplify-millanialpink-prod-164450-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-millanialpink-prod-164450-deployment",
+      "UnauthRoleName": "amplify-millanialpink-prod-164450-unauthRole",
+      "StackName": "amplify-millanialpink-prod-164450",
+      "StackId": "arn:aws:cloudformation:us-east-2:952368058941:stack/amplify-millanialpink-prod-164450/ae253c10-42e2-11eb-bfd8-0a055c98a16c",
+      "AmplifyAppId": "d2oshchtb94wji"
+    },
+    "categories": {
+      "function": {
+        "millanialpink12324f94": {}
+      }
+    }
+  },
   "dev": {
     "awscloudformation": {
       "AuthRoleName": "amplify-millanialpink-dev-182859-authRole",

@@ -11,12 +11,19 @@ var AWS = require("aws-sdk");
 AWS.config.update({region: 'us-east-2'});
 var ddbDocumentClient = new AWS.DynamoDB.DocumentClient();
 
-async function scanForResultsDdbDc1(){
+async function scanForResultsDdbDc1(wall_list_id){
     try {
         var params = {
-            TableName: process.env.API_MILLANIALPINK_WALLPAPERTABLE_NAME
+            TableName: process.env.API_MILLANIALPINK_WALLPAPERTABLE_NAME,
+            FilterExpression: "#walllistID = :walllistID",
+            ExpressionAttributeNames: {
+                "#walllistID": "walllistID"
+            },
+            ExpressionAttributeValues: { 
+                ":walllistID": wall_list_id // UUID id from the database 
+            }
         };
-        var result = await ddbDocumentClient.scan(params).promise()
+        var result = await ddbDocumentClient.scan(params).promise();
         return(result)
     } catch (error) {
         console.error(error);
@@ -25,7 +32,7 @@ async function scanForResultsDdbDc1(){
 async function scanForResultsDdbDc2(){
     try {
          var params = {
-            TableName: process.env.API_MILLANIALPINK_WALLLISTTABLE_NAME
+            TableName:  process.env.API_MILLANIALPINK_WALLLISTTABLE_NAME
         };
         var result = await ddbDocumentClient.scan(params).promise()
         return(result)
@@ -34,13 +41,18 @@ async function scanForResultsDdbDc2(){
     }
 }
 exports.handler = async (event) => {
-    const wallpapers = await scanForResultsDdbDc1();
+   
     const wallist = await scanForResultsDdbDc2();
-    console.log(wallpapers, wallist);
+    const { Items }  = wallist;
+    //console.log(Items.length);
+    const result = Items.map(async x=> 
+    {
+        let i = await scanForResultsDdbDc1(x.id);
+        return { ...x , wallpapers: i['Items'] }
+    }); 
+    const results = await Promise.all(result);
     return {
-        body: JSON.stringify({
-            wallpapers: wallpapers.Items,
-            wallist: wallist.Items
-        })
+        body: 
+            JSON.stringify({Items: results})
     }
 };

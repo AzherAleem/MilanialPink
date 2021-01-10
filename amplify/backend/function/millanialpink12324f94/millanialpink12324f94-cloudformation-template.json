@@ -127,8 +127,8 @@
         "Layers": [],
         "Timeout": "25",
         "Code": {
-          "S3Bucket": "amplify-millanialpink-dev-182859-deployment",
-          "S3Key": "amplify-builds/millanialpink12324f94-697836744533756b5670-build.zip"
+          "S3Bucket": "amplify-millanialpink-prod-164450-deployment",
+          "S3Key": "amplify-builds/millanialpink12324f94-63526863327568724e35-build.zip"
         }
       }
     },
